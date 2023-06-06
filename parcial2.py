@@ -3,17 +3,16 @@ import random
 import sys
 import objetos
 
-aux_nave = objetos.Nave(350,700,50,50,(255,0,0))
-aux_misil = objetos.Misil(aux_nave.rect.x+aux_nave.ancho/2-5,700,10,30,(0,0,255))
-fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
-invasores = []
-
 def crear_invasores(cantidad):
 
     for _ in range(cantidad):
         invasor = objetos.Invasor(70,50,(0,255,0))
         invasores.append(invasor)
 
+aux_nave = objetos.Nave(350,700,50,50,(255,0,0))
+aux_misil = objetos.Misil(aux_nave.rect.x+aux_nave.ancho/2-5,700,10,30,(0,0,255))
+fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
+invasores = []
 crear_invasores(5)
 
 
@@ -44,6 +43,7 @@ while running:
         aux_misil.disparar(aux_nave, evento, timer_disparo_misil)
         for invasor in invasores:
             invasor.recibir_disparo(aux_misil, aux_nave, timer_disparo_misil, evento)
+            invasor.mover()
     
     window.fill((0,0,0))
     window.blit(fondo_imagen, (0,0))

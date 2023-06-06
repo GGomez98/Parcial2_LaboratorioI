@@ -26,7 +26,9 @@ class Invasor():
         self.imagen = pygame.transform.scale(self.imagen, (ancho, alto))
         self.rect = self.imagen.get_rect()
         self.rect.x = random.randrange(0, 600-ancho)
-        self.rect.y = random.randrange(0, 650-alto)
+        self.rect.y = random.randrange(0, 500-alto)
+        self.velocidad_x = random.randrange(2,5)
+        self.velocidad_y = random.randrange(2,5)
         self.color = color
         self.punto_disparo = pygame.Rect(self.rect.x+10, self.rect.y+50-10, 50, 10)
     
@@ -39,6 +41,20 @@ class Invasor():
                 misil.rect.y = nave.rect.y
                 misil.rect.x = nave.rect.x+nave.ancho/2-misil.ancho/2
                 misil.disparo = False
+    
+    def mover(self):
+        self.rect.x += self.velocidad_x
+        self.rect.y += self.velocidad_y
+        self.punto_disparo = pygame.Rect(self.rect.x+10, self.rect.y+50-10, 50, 10)
+
+        if self.rect.left < 0:
+            self.velocidad_x += 2
+        if self.rect.right > 600:
+            self.velocidad_x -= 2
+        if self.rect.bottom > 500:
+            self.velocidad_y -= 2
+        if self.rect.top < 0:
+            self.velocidad_y += 2
 
 
 class Misil():
