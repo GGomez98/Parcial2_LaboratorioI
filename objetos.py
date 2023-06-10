@@ -61,6 +61,8 @@ class Nave():
             invasor.misil.disparo = False
             self.vidas -= 1
             self.recuperandose = True
+            self.imagen = pygame.image.load('Parcial_2/img/nave_recuperandose.png')
+            self.imagen = pygame.transform.scale(self.imagen, (self.ancho, self.alto))
 
 
 class Invasor(pygame.sprite.Sprite):
@@ -133,11 +135,7 @@ class Invasor(pygame.sprite.Sprite):
             self.ingreso = True
     
     def aumentar_dificultad(self, nave):
-        if nave.invasores_destruidos >= 30:
-            self.velocidad_misil_min = 30
-            self.velocidad_misil_max = 40
-            self.valor = 200
-        elif nave.invasores_destruidos >= 20:
+        if nave.invasores_destruidos >= 20:
             self.velocidad_misil_min = 20
             self.velocidad_misil_max = 30
             self.valor = 100
@@ -145,3 +143,13 @@ class Invasor(pygame.sprite.Sprite):
             self.velocidad_misil_min = 10
             self.velocidad_misil_max = 20
             self.valor = 75
+    
+class Boton():
+    def __init__(self, x, y, ancho, alto) -> None:
+        self.imagen = pygame.image.load('Parcial_2/img/start_BTN.png')
+        self.ancho = ancho
+        self.alto = alto
+        self.imagen = pygame.transform.scale(self.imagen, (ancho, alto))
+        self.rect = self.imagen.get_rect()
+        self.rect.x = x
+        self.rect.y = y
