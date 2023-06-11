@@ -1,6 +1,34 @@
 import pygame
 import pygame.mixer
 import sys
+import time
+
+#pygame.init()
+def cortina(window, pantalla_actual, timer, nivel):
+    fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
+    ANCHO_PANTALLA = 600
+    fuente_2 = pygame.font.Font('Parcial_2/fonts/ethnocentric/ethnocentric rg.otf', 20)
+    nivel_render = fuente_2.render(nivel, True, (255,255,255))
+    lista_eventos = pygame.event.get()
+
+    for evento in lista_eventos:
+        if evento.type == pygame.QUIT:
+            sys.exit()  
+        if evento.type == timer and nivel == "Nivel 1":
+            pantalla_actual = 4
+        elif evento.type == timer and nivel == "Nivel 2":
+            pantalla_actual = 6
+        elif evento.type == timer and nivel == "Nivel 3":
+            pantalla_actual = 8
+
+    window.fill((0,0,0))
+    window.blit(fondo_imagen, (0,0))
+    window.blit(nivel_render, (ANCHO_PANTALLA/2-50, 400))
+    pygame.display.flip()
+    pygame.display.update()
+
+    return pantalla_actual
+    
 
 def pantalla_instrucciones(window, pantalla_actual):
     fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
@@ -9,8 +37,7 @@ def pantalla_instrucciones(window, pantalla_actual):
     instrucciones_2 = ethnocentric.render("te disparen.", True, (255,255,255))
     instrucciones_3 = ethnocentric.render("Muevete con el mouse y haz click", True, (255,255,255))
     instrucciones_4 = ethnocentric.render("derecho para disparar.", True, (255,255,255))
-    instrucciones_5 = ethnocentric.render("Click derecho para iniciar", True, (255,255,255))
-    pantalla_actual = 2
+    instrucciones_5 = ethnocentric.render("Click izquierdo para iniciar", True, (255,255,255))
     lista_eventos = pygame.event.get()
 
     for evento in lista_eventos:
@@ -18,7 +45,6 @@ def pantalla_instrucciones(window, pantalla_actual):
             sys.exit()  
         if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
             pantalla_actual = 3
-        
     
     window.fill((0,0,0))
     window.blit(fondo_imagen, (0,0))

@@ -28,7 +28,7 @@ class Nave():
         self.misil = Misil(self.rect.x+self.ancho/2-5,700,10,30,(0,0,255))
         self.frente = pygame.Rect(self.rect.x+self.ancho/2-15, self.rect.y, 30, 10)
         self.alas = pygame.Rect(self.rect.x+self.ancho/2-25, self.rect.y+30, 50, 10)
-        self.vidas = 3
+        self.vidas = 10
         self.destruida = False
         self.invasores_destruidos = 0
         self.recuperandose = False
@@ -66,7 +66,7 @@ class Nave():
 
 
 class Invasor(pygame.sprite.Sprite):
-    def __init__(self, ancho, alto, color, valor):
+    def __init__(self, ancho, alto, color, valor, velocidad_misil_min, velocidad_misil_max):
         super().__init__()
         self.imagen = pygame.image.load('Parcial_2/img/invasor.png')
         self.ancho = ancho
@@ -82,22 +82,26 @@ class Invasor(pygame.sprite.Sprite):
         self.misil = Misil(self.rect.x+self.ancho/2, self.rect.y, 10,30,(0,0,255))
         self.ingreso = False
         self.misil.imagen = pygame.transform.rotate(self.misil.imagen, 180)
-        self.velocidad_misil_min= 5
-        self.velocidad_misil_max= 10
+        self.velocidad_misil_min= velocidad_misil_min#5
+        self.velocidad_misil_max= velocidad_misil_max#10
         self.valor = valor
         self.sonido_disparo = pygame.mixer.Sound("Parcial_2/sound/laser4.wav")
         self.sonido_disparo.set_volume(0.5)
+        self.disparo_recibido = False
     
-    def recibir_disparo(self, nave: Nave, puntos: int, lista_invasores):
-        if self.punto_disparo.colliderect(nave.misil.rect):
+    def eliminar(self, lista_invasores):
+        if self.disparo_recibido and self.misil.rect.top <= 0 or self.disparo_recibido and not self.misil.disparo:
+            lista_invasores.remove(self)
+
+    def recibir_disparo(self, nave: Nave, puntos: int):
+        if nave.misil.rect.colliderect(self.punto_disparo):
             puntos = puntos + self.valor
             nave.invasores_destruidos += 1
             nave.misil.rect.y = nave.rect.y
             nave.misil.rect.x = nave.rect.x+nave.ancho/2-nave.misil.ancho/2
             nave.misil.disparo = False
-            lista_invasores.remove(self)
-            invasor = Invasor(70,50,(0,255,0), 50)
-            lista_invasores.add(invasor)
+            self.imagen = pygame.transform.scale(self.imagen, (0, 0))
+            self.disparo_recibido = True
 
         return puntos
             
@@ -133,17 +137,7 @@ class Invasor(pygame.sprite.Sprite):
             self.misil.rect.x = self.rect.x+self.ancho/2-5 
         if self.rect.bottom >= 150:
             self.ingreso = True
-    
-    def aumentar_dificultad(self, nave):
-        if nave.invasores_destruidos >= 20:
-            self.velocidad_misil_min = 20
-            self.velocidad_misil_max = 30
-            self.valor = 100
-        elif nave.invasores_destruidos >= 10:
-            self.velocidad_misil_min = 10
-            self.velocidad_misil_max = 20
-            self.valor = 75
-    
+
 class Boton():
     def __init__(self, x, y, ancho, alto) -> None:
         self.imagen = pygame.image.load('Parcial_2/img/start_BTN.png')

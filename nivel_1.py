@@ -5,12 +5,6 @@ import re
 import sys
 import objetos
 
-def crear_invasores(cantidad, lista_invasores):
-
-    for _ in range(cantidad):
-        invasor = objetos.Invasor(70,50,(0,255,0), 50)
-        lista_invasores.add(invasor)
-
 def temporizador(tiempo: dict):
     tiempo['segundos'] += 1
     if tiempo['segundos']>59:
@@ -58,15 +52,17 @@ def nivel_1(window, invasores, nave, timer_10_milisegundos, timer_recuperacion, 
         if nave.vidas == 0:
             nave.destruida = True
     for invasor in invasores:
-        puntaje = invasor.recibir_disparo(nave, puntaje, invasores)
-        puntaje_render = fuente.render(f"Puntaje: {puntaje}", True, (255,255,255))
+        puntaje = invasor.recibir_disparo(nave, puntaje)
+        invasor.eliminar(invasores)
         nave.recibir_disparo(invasor)
-        invasor.aumentar_dificultad(nave)
+    puntaje_txt = str(puntaje).zfill(5)
+    puntaje_render = fuente.render(f"Puntaje: {puntaje_txt}", True, (255,255,255))
     vidas_render = fuente.render(f"Vidas: {nave.vidas}", True, (255,255,255))
     segundos_txt = str(tiempo['segundos']).zfill(2)
     minutos_txt =  str(tiempo['minutos']).zfill(2)
     tiempo_txt = f"{minutos_txt}:{segundos_txt}"
     tiempo_render = fuente.render(tiempo_txt, True, (255,255,255))
+    nivel_render = fuente.render("Nivel 1", True, (255,255,255))
     window.fill((0,0,0))
     window.blit(fondo_imagen, (0,0))
     window.blit(nave.imagen, nave.rect)
@@ -76,7 +72,8 @@ def nivel_1(window, invasores, nave, timer_10_milisegundos, timer_recuperacion, 
         window.blit(invasor.imagen, invasor.rect)
     window.blit(puntaje_render, (5,20))
     window.blit(vidas_render, (ANCHO_PANTALLA-130,20))
-    window.blit(tiempo_render, (ANCHO_PANTALLA/2-20,20))
+    window.blit(tiempo_render, (ANCHO_PANTALLA/2-45,20))
+    window.blit(nivel_render, (ANCHO_PANTALLA/2+50,20))
     pygame.display.flip()
     pygame.display.update()
 
