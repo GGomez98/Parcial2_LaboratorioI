@@ -28,7 +28,7 @@ class Nave():
         self.misil = Misil(self.rect.x+self.ancho/2-5,700,10,30,(0,0,255))
         self.frente = pygame.Rect(self.rect.x+self.ancho/2-15, self.rect.y, 30, 10)
         self.alas = pygame.Rect(self.rect.x+self.ancho/2-25, self.rect.y+30, 50, 10)
-        self.vidas = 10
+        self.vidas = 1
         self.destruida = False
         self.invasores_destruidos = 0
         self.recuperandose = False
@@ -54,8 +54,9 @@ class Nave():
                 self.misil.rect.x = self.rect.x+self.ancho/2-self.misil.ancho/2
                 self.misil.disparo = False
     
-    def recibir_disparo(self, invasor):
+    def recibir_disparo(self, invasor, timer_recuperacion):
         if (self.frente.colliderect(invasor.misil.rect) or self.alas.colliderect(invasor.misil.rect)) and not self.recuperandose:
+            pygame.time.set_timer(timer_recuperacion, 3000)
             invasor.misil.rect.y = invasor.rect.y
             invasor.misil.rect.x = invasor.rect.x+invasor.ancho/2-invasor.misil.ancho/2
             invasor.misil.disparo = False
@@ -74,7 +75,7 @@ class Invasor(pygame.sprite.Sprite):
         self.imagen = pygame.transform.scale(self.imagen, (ancho, alto))
         self.rect = self.imagen.get_rect()
         self.rect.x = random.randrange(0, 600-ancho)
-        self.rect.y = random.randrange(-900,-600)
+        self.rect.y = random.randrange(-900,-100)
         self.velocidad_x = random.randrange(1,3)
         self.velocidad_y = random.randrange(1,3)
         self.color = color
@@ -82,8 +83,8 @@ class Invasor(pygame.sprite.Sprite):
         self.misil = Misil(self.rect.x+self.ancho/2, self.rect.y, 10,30,(0,0,255))
         self.ingreso = False
         self.misil.imagen = pygame.transform.rotate(self.misil.imagen, 180)
-        self.velocidad_misil_min= velocidad_misil_min#5
-        self.velocidad_misil_max= velocidad_misil_max#10
+        self.velocidad_misil_min= velocidad_misil_min
+        self.velocidad_misil_max= velocidad_misil_max
         self.valor = valor
         self.sonido_disparo = pygame.mixer.Sound("Parcial_2/sound/laser4.wav")
         self.sonido_disparo.set_volume(0.5)

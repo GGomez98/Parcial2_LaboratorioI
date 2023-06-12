@@ -15,8 +15,6 @@ def pantalla_inicio(btn_start, pantalla_actual, window):
         if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             if btn_start.rect.x <= mouse_x <= btn_start.rect.x+btn_start.ancho and btn_start.rect.y <= mouse_y <= btn_start.rect.y+btn_start.alto:
-                print("pantalla_actual") 
-                print("Se hizo click en el boton!")
                 pantalla_actual = 2
     
     window.fill((0,0,0))

@@ -13,7 +13,7 @@ def temporizador(tiempo: dict):
 
     return tiempo
 
-def nivel_1(window, invasores, nave, timer_10_milisegundos, timer_recuperacion, timer_segundo, timer_disparo_invasores, tiempo, fuente, puntaje):
+def nivel(window, invasores, nave, timer_10_milisegundos, timer_recuperacion, timer_segundo, tiempo, fuente, puntaje, nivel):
     ALTO_PANTALLA = 800
     ANCHO_PANTALLA = 600
     fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
@@ -45,16 +45,17 @@ def nivel_1(window, invasores, nave, timer_10_milisegundos, timer_recuperacion, 
         if evento.type == timer_segundo and not nave.destruida:
             temporizador(tiempo)
         for invasor in invasores:
-            if (evento.type == timer_disparo_invasores or invasor.rect.x == nave.rect.x) and not nave.destruida and invasor.ingreso and not invasor.misil.disparo:
+            if invasor.rect.x == nave.rect.x and not nave.destruida and invasor.ingreso and not invasor.misil.disparo:
                 if not invasor.misil.disparo:
                     invasor.sonido_disparo.play()
                 invasor.misil.disparo = True
+                #pygame.time.set_timer(timer_disparo_invasores, random.randrange(1000, 5000))
         if nave.vidas == 0:
             nave.destruida = True
     for invasor in invasores:
         puntaje = invasor.recibir_disparo(nave, puntaje)
         invasor.eliminar(invasores)
-        nave.recibir_disparo(invasor)
+        nave.recibir_disparo(invasor, timer_recuperacion)
     puntaje_txt = str(puntaje).zfill(5)
     puntaje_render = fuente.render(f"Puntaje: {puntaje_txt}", True, (255,255,255))
     vidas_render = fuente.render(f"Vidas: {nave.vidas}", True, (255,255,255))
@@ -62,7 +63,7 @@ def nivel_1(window, invasores, nave, timer_10_milisegundos, timer_recuperacion, 
     minutos_txt =  str(tiempo['minutos']).zfill(2)
     tiempo_txt = f"{minutos_txt}:{segundos_txt}"
     tiempo_render = fuente.render(tiempo_txt, True, (255,255,255))
-    nivel_render = fuente.render("Nivel 1", True, (255,255,255))
+    nivel_render = fuente.render(nivel, True, (255,255,255))
     window.fill((0,0,0))
     window.blit(fondo_imagen, (0,0))
     window.blit(nave.imagen, nave.rect)
