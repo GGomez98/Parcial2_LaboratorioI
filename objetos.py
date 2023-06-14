@@ -4,7 +4,7 @@ import pygame.mixer
 
 class Misil():
     def __init__(self, x, y, ancho, alto, color) -> None:
-        self.imagen = pygame.image.load('Parcial_2/img/misil.png')
+        self.imagen = pygame.image.load('img/misil.png')
         self.ancho = ancho
         self.alto = alto
         self.imagen = pygame.transform.scale(self.imagen, (ancho, alto))
@@ -17,7 +17,7 @@ class Misil():
 
 class Nave():
     def __init__(self, x, y, ancho, alto, color) -> None:
-        self.imagen = pygame.image.load('Parcial_2/img/nave.png')
+        self.imagen = pygame.image.load('img/nave.png')
         self.ancho = ancho
         self.alto = alto
         self.imagen = pygame.transform.scale(self.imagen, (ancho, alto))
@@ -32,9 +32,9 @@ class Nave():
         self.destruida = False
         self.invasores_destruidos = 0
         self.recuperandose = False
-        self.sonido_disparo = pygame.mixer.Sound("Parcial_2/sound/laser1.wav")
+        self.sonido_disparo = pygame.mixer.Sound("sound/laser1.wav")
         self.sonido_disparo.set_volume(0.5)
-        self.sonido_destruido = pygame.mixer.Sound("Parcial_2/sound/explosion_nave.mp3")
+        self.sonido_destruido = pygame.mixer.Sound("sound/explosion_nave.mp3")
         self.sonido_destruido.set_volume(0.5)
         self.ejecutar_sonido = True
     
@@ -62,14 +62,14 @@ class Nave():
             invasor.misil.disparo = False
             self.vidas -= 1
             self.recuperandose = True
-            self.imagen = pygame.image.load('Parcial_2/img/nave_recuperandose.png')
+            self.imagen = pygame.image.load('img/nave_recuperandose.png')
             self.imagen = pygame.transform.scale(self.imagen, (self.ancho, self.alto))
 
 
 class Invasor(pygame.sprite.Sprite):
     def __init__(self, ancho, alto, color, valor, velocidad_misil_min, velocidad_misil_max):
         super().__init__()
-        self.imagen = pygame.image.load('Parcial_2/img/invasor.png')
+        self.imagen = pygame.image.load('img/invasor.png')
         self.ancho = ancho
         self.alto = alto
         self.imagen = pygame.transform.scale(self.imagen, (ancho, alto))
@@ -86,7 +86,7 @@ class Invasor(pygame.sprite.Sprite):
         self.velocidad_misil_min= velocidad_misil_min
         self.velocidad_misil_max= velocidad_misil_max
         self.valor = valor
-        self.sonido_disparo = pygame.mixer.Sound("Parcial_2/sound/laser4.wav")
+        self.sonido_disparo = pygame.mixer.Sound("sound/laser4.wav")
         self.sonido_disparo.set_volume(0.5)
         self.disparo_recibido = False
     
@@ -141,7 +141,7 @@ class Invasor(pygame.sprite.Sprite):
 
 class Boton():
     def __init__(self, x, y, ancho, alto) -> None:
-        self.imagen = pygame.image.load('Parcial_2/img/start_BTN.png')
+        self.imagen = pygame.image.load('img/start_BTN.png')
         self.ancho = ancho
         self.alto = alto
         self.imagen = pygame.transform.scale(self.imagen, (ancho, alto))

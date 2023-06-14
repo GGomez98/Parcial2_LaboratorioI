@@ -16,7 +16,7 @@ def temporizador(tiempo: dict):
 def nivel(window, invasores, nave, timer_10_milisegundos, timer_recuperacion, timer_segundo, tiempo, fuente, puntaje, nivel):
     ALTO_PANTALLA = 800
     ANCHO_PANTALLA = 600
-    fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
+    fondo_imagen = pygame.image.load("img/fondo.png")
 
     lista_eventos = pygame.event.get()
 
@@ -40,7 +40,7 @@ def nivel(window, invasores, nave, timer_10_milisegundos, timer_recuperacion, ti
                     invasor.ingresar()
         if evento.type == timer_recuperacion and nave.recuperandose and nave.vidas != 0:
             nave.recuperandose = False
-            nave.imagen = pygame.image.load('Parcial_2/img/nave.png')
+            nave.imagen = pygame.image.load('img/nave.png')
             nave.imagen = pygame.transform.scale(nave.imagen, (nave.ancho, nave.alto))
         if evento.type == timer_segundo and not nave.destruida:
             temporizador(tiempo)

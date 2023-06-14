@@ -17,13 +17,13 @@ def crear_invasores(cantidad, lista_invasores, velocidad_misil_min, velocidad_mi
 pygame.init()
 pygame.mixer.init()
 
-fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
+fondo_imagen = pygame.image.load("img/fondo.png")
 ALTO_PANTALLA = 800
 ANCHO_PANTALLA = 600
 pantalla_actual = 1
 
-fuente = pygame.font.Font('Parcial_2/fonts/ethnocentric/ethnocentric rg.otf', 70)
-fuente_2 = pygame.font.Font('Parcial_2/fonts/ethnocentric/ethnocentric rg.otf', 20)
+fuente = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 70)
+fuente_2 = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 20)
 titulo = fuente.render("Invasores", True, (255,255,255))
 
 btn_start = objetos.Boton(100,300,410,121)

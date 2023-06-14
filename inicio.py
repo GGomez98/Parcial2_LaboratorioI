@@ -4,8 +4,8 @@ import sys
 
 def pantalla_inicio(btn_start, pantalla_actual, window):
     ANCHO_PANTALLA = 600
-    fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
-    ethnocentric = pygame.font.Font('Parcial_2/fonts/ethnocentric/ethnocentric rg.otf', 70)
+    fondo_imagen = pygame.image.load("img/fondo.png")
+    ethnocentric = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 70)
     titulo = ethnocentric.render("Invasores", True, (255,255,255))
     lista_eventos = pygame.event.get()
 

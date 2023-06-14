@@ -5,10 +5,10 @@ import re
 
 """pygame.init()
 
-fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
+fondo_imagen = pygame.image.load("img/fondo.png")
 ANCHO_PANTALLA = 600
 ALTO_PANTALLA = 800
-fuente_2 = pygame.font.Font('Parcial_2/fonts/ethnocentric/ethnocentric rg.otf', 20)
+fuente_2 = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 20)
 nombre = ''
 
 running = True
@@ -35,9 +35,9 @@ while running:
     pygame.display.update()"""
 
 def ingresar_nombre(window, nombre):
-    fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
+    fondo_imagen = pygame.image.load("img/fondo.png")
     ANCHO_PANTALLA = 600
-    fuente_2 = pygame.font.Font('Parcial_2/fonts/ethnocentric/ethnocentric rg.otf', 20)
+    fuente_2 = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 20)
     lista_eventos = pygame.event.get()
 
     for evento in lista_eventos:
@@ -58,9 +58,9 @@ def ingresar_nombre(window, nombre):
     return nombre
 
 def fin_del_juego(window, nave, invasores, puntaje, tiempo):
-    fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
+    fondo_imagen = pygame.image.load("img/fondo.png")
     ANCHO_PANTALLA = 600
-    fuente_2 = pygame.font.Font('Parcial_2/fonts/ethnocentric/ethnocentric rg.otf', 20)
+    fuente_2 = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 20)
     pantalla_actual = 9
     lista_eventos = pygame.event.get()
 
@@ -94,9 +94,9 @@ def fin_del_juego(window, nave, invasores, puntaje, tiempo):
     return pantalla_actual
 
 def cortina(window, pantalla_actual, timer, nivel):
-    fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
+    fondo_imagen = pygame.image.load("img/fondo.png")
     ANCHO_PANTALLA = 600
-    fuente_2 = pygame.font.Font('Parcial_2/fonts/ethnocentric/ethnocentric rg.otf', 20)
+    fuente_2 = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 20)
     nivel_render = fuente_2.render(nivel, True, (255,255,255))
     lista_eventos = pygame.event.get()
 
@@ -120,8 +120,8 @@ def cortina(window, pantalla_actual, timer, nivel):
     
 
 def pantalla_instrucciones(window, pantalla_actual):
-    fondo_imagen = pygame.image.load("Parcial_2/img/fondo.png")
-    ethnocentric = pygame.font.Font('Parcial_2/fonts/ethnocentric/ethnocentric rg.otf', 19)
+    fondo_imagen = pygame.image.load("img/fondo.png")
+    ethnocentric = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 19)
     instrucciones_1 = ethnocentric.render("Destruye a los invasores y evita que", True, (255,255,255))
     instrucciones_2 = ethnocentric.render("te disparen.", True, (255,255,255))
     instrucciones_3 = ethnocentric.render("Muevete con el mouse y haz click", True, (255,255,255))
