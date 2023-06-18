@@ -4,15 +4,8 @@ import random
 import re
 import sys
 import objetos
-from inicio import *
-from instrucciones import *
-from niveles import *
-
-def crear_invasores(cantidad, lista_invasores, velocidad_misil_min, velocidad_misil_max, valor):
-
-    for _ in range(cantidad):
-        invasor = objetos.Invasor(70,50,(0,255,0), valor, velocidad_misil_min, velocidad_misil_max)
-        lista_invasores.add(invasor)
+from pantallas import *
+from funciones import *
 
 pygame.init()
 pygame.mixer.init()
@@ -26,7 +19,8 @@ fuente = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 70)
 fuente_2 = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 20)
 titulo = fuente.render("Invasores", True, (255,255,255))
 
-btn_start = objetos.Boton(100,300,410,121)
+btn_start = objetos.Boton(100,300,410,121,'img/start_BTN.png')
+btn_higscore = objetos.Boton(255,441,121,121, 'img/highscores.png')
 
 nave = objetos.Nave(350,700,50,50,(255,0,0))
 invasores = pygame.sprite.Group()
@@ -54,7 +48,7 @@ pygame.display.set_caption("Juego")
 while running:
 
     if pantalla_actual == 1:
-        pantalla_actual = pantalla_inicio(btn_start, pantalla_actual ,window)
+        pantalla_actual = pantalla_inicio(btn_start, btn_higscore, pantalla_actual ,window)
     
     if pantalla_actual == 2:
         pantalla_actual = pantalla_instrucciones(window, pantalla_actual)
@@ -101,7 +95,13 @@ while running:
             pantalla_actual = 9
     
     if pantalla_actual == 9:
-        pantalla_actual = fin_del_juego(window, nave, invasores, puntaje, tiempo)
+        nombre = fin_del_juego(window, nave, invasores, puntaje, tiempo, nombre)
+        if nombre == 'datos cargados':
+            nombre = ''
+            puntaje = 0
+            tiempo = {"minutos": 0, "segundos": 0}
+            nave.vidas = 1
+            pantalla_actual = 1
 
     
 

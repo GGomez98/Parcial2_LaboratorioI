@@ -140,8 +140,8 @@ class Invasor(pygame.sprite.Sprite):
             self.ingreso = True
 
 class Boton():
-    def __init__(self, x, y, ancho, alto) -> None:
-        self.imagen = pygame.image.load('img/start_BTN.png')
+    def __init__(self, x, y, ancho, alto, imagen) -> None:
+        self.imagen = pygame.image.load(imagen)
         self.ancho = ancho
         self.alto = alto
         self.imagen = pygame.transform.scale(self.imagen, (ancho, alto))
