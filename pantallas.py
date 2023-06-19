@@ -22,7 +22,8 @@ def fin_del_juego(window, nave, invasores, puntaje, tiempo, nombre):
                 nombre = nombre[:-1]
             elif evento.key == pygame.K_RETURN:
                 if nombre != '':
-                    insert_datos(nombre, puntaje, "bd_btf.db")
+                    tiempo_txt = f"{str(tiempo['minutos']).zfill(2)}: {str(tiempo['segundos']).zfill(2)}"
+                    insert_datos(nombre, puntaje, tiempo_txt, "bd_btf.db")
                     nombre = 'datos cargados'
 
     retorno = nombre
@@ -191,6 +192,8 @@ def pantalla_inicio(btn_start, btn_higscore, pantalla_actual, window):
             mouse_x, mouse_y = pygame.mouse.get_pos()
             if btn_start.rect.collidepoint(mouse_x,mouse_y):
                 pantalla_actual = 2
+            elif btn_higscore.rect.collidepoint(mouse_x,mouse_y):
+                pantalla_actual = 10
     
     window.fill((0,0,0))
     window.blit(fondo_imagen, (0,0))
@@ -200,5 +203,30 @@ def pantalla_inicio(btn_start, btn_higscore, pantalla_actual, window):
     pygame.display.flip()
     pygame.display.update()
                 
+
+    return pantalla_actual
+
+def pantalla_puntuaciones(window, pantalla_actual):
+
+    fondo_imagen = pygame.image.load("img/fondo.png")
+    fuente_3 = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 18)
+    lista_eventos = pygame.event.get()
+
+    for evento in lista_eventos:
+        if evento.type == pygame.QUIT:
+            sys.exit()
+        elif evento.type == pygame.KEYDOWN:
+           if evento.key == pygame.K_ESCAPE:
+            pantalla_actual = 1
+    
+    salir_render = fuente_3.render("Oprima 'ESC' para salir", True, (255,255,255))
+    
+
+    window.fill((0,0,0))
+    window.blit(fondo_imagen, (0,0))
+    leer_csv("puntuaciones.csv", fuente_3, window)
+    window.blit(salir_render,(135, 750))
+    pygame.display.flip()
+    pygame.display.update()
 
     return pantalla_actual

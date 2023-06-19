@@ -14,6 +14,7 @@ fondo_imagen = pygame.image.load("img/fondo.png")
 ALTO_PANTALLA = 800
 ANCHO_PANTALLA = 600
 pantalla_actual = 1
+crear_tabla("bd_btf.db", 'puntuaciones')
 
 fuente = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 70)
 fuente_2 = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 20)
@@ -27,6 +28,8 @@ invasores = pygame.sprite.Group()
 puntaje = 0
 tiempo = {"minutos": 0, "segundos": 0}
 nivel_iniciado = False
+puntuaciones = get_datos("bd_btf.db")
+cargar_lista(puntuaciones, "puntuaciones.csv")
 
 nombre = ''
 
@@ -100,8 +103,15 @@ while running:
             nombre = ''
             puntaje = 0
             tiempo = {"minutos": 0, "segundos": 0}
-            nave.vidas = 1
+            nave = objetos.Nave(350,700,50,50,(255,0,0))
             pantalla_actual = 1
+            invasores = pygame.sprite.Group()
+            nivel_iniciado = False
+            puntuaciones = get_datos("bd_btf.db")
+            cargar_lista(puntuaciones, "puntuaciones.csv")
+    
+    if pantalla_actual == 10:
+        pantalla_actual = pantalla_puntuaciones(window, pantalla_actual)
 
     
 

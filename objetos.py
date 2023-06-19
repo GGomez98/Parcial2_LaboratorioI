@@ -28,7 +28,7 @@ class Nave():
         self.misil = Misil(self.rect.x+self.ancho/2-5,700,10,30,(0,0,255))
         self.frente = pygame.Rect(self.rect.x+self.ancho/2-15, self.rect.y, 30, 10)
         self.alas = pygame.Rect(self.rect.x+self.ancho/2-25, self.rect.y+30, 50, 10)
-        self.vidas = 1
+        self.vidas = 5
         self.destruida = False
         self.invasores_destruidos = 0
         self.recuperandose = False
