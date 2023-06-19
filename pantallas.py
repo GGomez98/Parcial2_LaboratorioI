@@ -31,9 +31,15 @@ def fin_del_juego(window, nave, invasores, puntaje, tiempo, nombre):
     if nave.vidas == 0:
         mensaje_render = fuente_2.render("Los invasores ganaron", True, (255,255,255))
         pos_mensaje = (ANCHO_PANTALLA/2-200, 300)
+        if nave.ejecutar_sonido:
+            nave.sonido_destruido.play()
+            nave.ejecutar_sonido = False
     elif len(invasores) == 0:
         mensaje_render = fuente_2.render("Felicidades! Ganaste!", True, (255,255,255))
         pos_mensaje = (ANCHO_PANTALLA/2-150, 300)
+        if nave.ejecutar_sonido:
+            nave.sonido_victoria.play()
+            nave.ejecutar_sonido = False
 
     nombre_render = fuente_2.render(nombre, True, (255,255,255))
     puntaje_render = fuente_2.render(f"Tu puntaje final es {puntaje}", True, (255,255,255))

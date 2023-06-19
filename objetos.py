@@ -34,8 +34,10 @@ class Nave():
         self.recuperandose = False
         self.sonido_disparo = pygame.mixer.Sound("sound/laser1.wav")
         self.sonido_disparo.set_volume(0.5)
-        self.sonido_destruido = pygame.mixer.Sound("sound/explosion_nave.mp3")
+        self.sonido_destruido = pygame.mixer.Sound("sound/explosion.wav")
         self.sonido_destruido.set_volume(0.5)
+        self.sonido_victoria = pygame.mixer.Sound("sound/won.wav")
+        self.sonido_victoria.set_volume(0.5)
         self.ejecutar_sonido = True
     
     def mover_nave(self,pos):
@@ -98,6 +100,8 @@ class Invasor(pygame.sprite.Sprite):
         if nave.misil.rect.colliderect(self.punto_disparo):
             puntos = puntos + self.valor
             nave.invasores_destruidos += 1
+            self.rect.y = -500
+            self.rect.x = -500
             nave.misil.rect.y = nave.rect.y
             nave.misil.rect.x = nave.rect.x+nave.ancho/2-nave.misil.ancho/2
             nave.misil.disparo = False
