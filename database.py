@@ -46,10 +46,10 @@ def guardar_archivo(nombre_archivo, contenido):
         archivo = open(nombre_archivo,'w+')
         archivo.write(contenido)
         archivo.close()
-        print("Se creo el archivo: "+nombre_archivo)
+        print("Se cargo el archivo: "+nombre_archivo)
         retorno = True
     else:
-        print('Error al crear el archivo: '+nombre_archivo)
+        print('Error al cargar el archivo: '+nombre_archivo)
         retorno = False
     
     return retorno
@@ -68,3 +68,4 @@ def cargar_lista(lista, nombre_archivo):
     retorno = guardar_archivo(nombre_archivo, lista_a_cargar)
     
     return retorno
+

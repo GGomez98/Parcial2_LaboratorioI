@@ -23,7 +23,7 @@ def fin_del_juego(window, nave, invasores, puntaje, tiempo, nombre):
             elif evento.key == pygame.K_RETURN:
                 if nombre != '':
                     tiempo_txt = f"{str(tiempo['minutos']).zfill(2)}: {str(tiempo['segundos']).zfill(2)}"
-                    insert_datos(nombre, puntaje, tiempo_txt, "bd_btf.db")
+                    insert_datos(nombre, puntaje, tiempo_txt, "DB/puntuaciones.db")
                     nombre = 'datos cargados'
 
     retorno = nombre
@@ -224,7 +224,7 @@ def pantalla_puntuaciones(window, pantalla_actual):
 
     window.fill((0,0,0))
     window.blit(fondo_imagen, (0,0))
-    leer_csv("puntuaciones.csv", fuente_3, window)
+    leer_csv("DB/puntuaciones.csv", fuente_3, window)
     window.blit(salir_render,(135, 750))
     pygame.display.flip()
     pygame.display.update()

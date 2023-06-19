@@ -1,6 +1,5 @@
 import objetos
 import csv
-import pygame
 
 def crear_invasores(cantidad, lista_invasores, velocidad_misil_min, velocidad_misil_max, valor):
 
@@ -32,4 +31,3 @@ def leer_csv(archivo_csv, fuente, window):
             window.blit(linea_render, (10, i*50))
             i+=1
 
-#leer_csv('puntuaciones.csv')

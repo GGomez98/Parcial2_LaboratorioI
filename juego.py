@@ -1,8 +1,5 @@
 import pygame
 import pygame.mixer
-import random
-import re
-import sys
 import objetos
 from pantallas import *
 from funciones import *
@@ -14,7 +11,7 @@ fondo_imagen = pygame.image.load("img/fondo.png")
 ALTO_PANTALLA = 800
 ANCHO_PANTALLA = 600
 pantalla_actual = 1
-crear_tabla("bd_btf.db", 'puntuaciones')
+crear_tabla("DB/puntuaciones.db", 'puntuaciones')
 
 fuente = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 70)
 fuente_2 = pygame.font.Font('fonts/ethnocentric/ethnocentric rg.otf', 20)
@@ -28,8 +25,8 @@ invasores = pygame.sprite.Group()
 puntaje = 0
 tiempo = {"minutos": 0, "segundos": 0}
 nivel_iniciado = False
-puntuaciones = get_datos("bd_btf.db")
-cargar_lista(puntuaciones, "puntuaciones.csv")
+puntuaciones = get_datos("DB/puntuaciones.db")
+cargar_lista(puntuaciones, "DB/puntuaciones.csv")
 
 nombre = ''
 
@@ -107,8 +104,8 @@ while running:
             pantalla_actual = 1
             invasores = pygame.sprite.Group()
             nivel_iniciado = False
-            puntuaciones = get_datos("bd_btf.db")
-            cargar_lista(puntuaciones, "puntuaciones.csv")
+            puntuaciones = get_datos("DB/puntuaciones.db")
+            cargar_lista(puntuaciones, "DB/puntuaciones.csv")
     
     if pantalla_actual == 10:
         pantalla_actual = pantalla_puntuaciones(window, pantalla_actual)
